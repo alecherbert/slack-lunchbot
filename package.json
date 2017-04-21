@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.x.x",
     "body-parser": "^1.x.x",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "dotenv": "^4.x.x"
   }
 }
