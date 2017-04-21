@@ -1,8 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var inHandler = require('./handlers/in');
-var outHandler = require('./handlers/out');
-var rollHandler = require('./handlers/slash/roll');
+var lunchbotHandler = require('./handlers/slash/lunchbot');
+var dotenv = require('dotenv');
+dotenv.load();
  
 var app = express();
 var port = process.env.PORT || 3000;
@@ -11,9 +11,7 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
  
 // handler mapping
-app.post('/inhook', inHandler);
-app.post('/outhook', outHandler);
-app.post('/slash/roll', rollHandler);
+app.post('/slash/lunchbot', lunchbotHandler);
  
 // error handler
 app.use(function (err, req, res, next) {
