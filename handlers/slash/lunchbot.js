@@ -6,6 +6,7 @@ var LOC_ID = process.env.LOCATION_IDENTIFIER;
 var URL_ROOT = process.env.URL_ROOT;
 
 module.exports = function (req, res, next) {
+  console.log("SLASH");
   var token = req.body.token;
 
   if (token !== TOKEN) {
@@ -19,17 +20,11 @@ module.exports = function (req, res, next) {
   }
 
   var Global = require ('../../app');
+  console.log(JSON.stringify(Global));
   var payload = {
     response_type: 'in_channel',
     mrkdwn: true,
-    attachments: [
-      {
-        title: Global.title,
-        text: Global.text,
-        color: "#439FFF"
-      }
-    ]
+    attachments: Global.attachments
   };
   return res.json(payload);
 };
-
