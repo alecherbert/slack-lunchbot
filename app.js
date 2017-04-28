@@ -24,10 +24,7 @@ var Global = {
 app.use(bodyParser.urlencoded({extended: true}));
  
 // handler mapping
-app.post('/lunchbot', function() {
-    console.log("slash command recieved");
-    lunchbotHandler();
-});
+app.post('/lunchbot', lunchbotHandler);
 
 app.get('/here', function(req,res) {
   console.log("GET-ing");
@@ -75,16 +72,19 @@ function getMenu() {
               var dayName = $elem.find(".day_name").first().html()
               attTemp.push({
                 title: "[" + dayNumber + "] - " + dayName,
-                text: ""
+                text: "",
+                color: "good"
               });
             } else {
-              var category = $elem.find(".right bold").first().html();
+              var category = $elem.find(".right.bold").first().html();
               var menuItem = $elem.find(".menu_item_text").first().html();
-              var priceText = $elem.find(".menu_item_text").first().html();
-              var price = priceText.length != 0 ? "_("+priceText+")_" : "";
+              var priceText = $elem.find(".right").not(".bold").first().html();
+              var price = priceText.length != 0 ? "\n_("+priceText+")_" : "";
               attTemp.push({
                 title: category,
-                text: menuItem + " " + price
+                text: menuItem + " " + price,
+                color: "#439FE0",
+                mrkdwn_in: ["text"]
               });
             }
           });
